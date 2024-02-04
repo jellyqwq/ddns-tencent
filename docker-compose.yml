@@ -1,0 +1,15 @@
+services:
+  ddns:
+    image: jellyqwq/ddns-tencent:0.1.1
+    container_name: ddns-tencent
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - SecretId=
+      - SecretKey=
+      - Domain=
+      - SubDomain=
+      - RecordType=AAAA
+      - RecordLine=默认
+      - RecordId=
+      - CronExpression=*/5 * * * *
