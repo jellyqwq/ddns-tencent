@@ -1,0 +1,6 @@
+github.com/robfig/cron/v3 v3.0.1 h1:WdRxkvbJztn8LMz/QEvLN5sBU+xKpSqwwUO1Pjr4qDs=
+github.com/robfig/cron/v3 v3.0.1/go.mod h1:eQICP3HwyT7UooqI/z+Ov+PtYAWygg1TEWWzGIFLtro=
+github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.856 h1:4PaaKxPjh0dmRzzz0CRZSZlbvzQIPcg4TE1Ibz0Cdlk=
+github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.856/go.mod h1:r5r4xbfxSaeR04b166HGsBa/R4U3SueirEUpXGuw+Q0=
+github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dnspod v1.0.856 h1:ffLx7LGy98wUlS2V4FNI8obfQU/E8sRKKrPbhRttqa4=
+github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dnspod v1.0.856/go.mod h1:XjnHwQ6x4BK7dVq8pgGyPqG/6mnn9XeJxqOziLELSB0=
