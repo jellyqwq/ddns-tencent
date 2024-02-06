@@ -1,0 +1,52 @@
+name: build docker image
+
+on:
+  push:
+    tags:
+      - *
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+
+jobs:
+  build:
+    runs-on: debian-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set version
+        id: version
+        run: echo ::set-output name=release_version::${GITHUB_REF#refs/*/}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        # id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          # 所需要的体系结构，可以在 Available platforms 步骤中获取所有的可用架构
+          platforms: linux/amd64
+          build-args: |
+            APP_NAME=${{ github.event.repository.name }}
+          push: true
+          # 给清单打上多个标签
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ steps.version.outputs.release_version }}
+            
