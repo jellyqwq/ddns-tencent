@@ -56,12 +56,13 @@ func init() {
 
 	// 检查是否有 Ipv<4|6>Domain 参数, 没有则退出
 	for _, value := range []string{"Ipv4", "Ipv6"} {
-		if os.Getenv(fmt.Sprintf("%sDomain", value)) == "" {
-			log.Printf("Skip %s ", value)
-			continue
-		} else if value == "Ipv4" {
+		if value == "Ipv4" {
 			ipv4Property = NewDDNSproperty()
 			ipv4Property.Domain = os.Getenv(fmt.Sprintf("%sDomain", value))
+			if ipv4Property.Domain == "" {
+				log.Printf("Skip %s ", value)
+				continue
+			}
 			ipv4Property.SubDomain = os.Getenv(fmt.Sprintf("%sSubDomain", value))
 			if os.Getenv(fmt.Sprintf("%sRecordLine", value)) != "" {
 				ipv4Property.RecordLine = os.Getenv(fmt.Sprintf("%sRecordLine", value))
@@ -71,6 +72,10 @@ func init() {
 		} else {
 			ipv6Property = NewDDNSproperty()
 			ipv6Property.Domain = os.Getenv(fmt.Sprintf("%sDomain", value))
+			if ipv6Property.Domain == "" {
+				log.Printf("Skip %s ", value)
+				continue
+			}
 			ipv6Property.SubDomain = os.Getenv(fmt.Sprintf("%sSubDomain", value))
 			if os.Getenv(fmt.Sprintf("%sRecordLine", value)) != "" {
 				ipv6Property.RecordLine = os.Getenv(fmt.Sprintf("%sRecordLine", value))
