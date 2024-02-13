@@ -194,6 +194,9 @@ func task() {
 }
 
 func main() {
+	// 先执行一次task()
+	task()
+	
 	// 定时
 	c := cron.New()
 	_, err := c.AddFunc(CronExpression, func() {
