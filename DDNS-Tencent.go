@@ -179,7 +179,7 @@ func task() {
 		}
 
 		// 两个都找到了提前结束寻找
-		if ipv4 != "" && ipv6 != "" {
+		if ipv4 != "" && ipv6 != "" && ipv4Property.Domain != "" && ipv6Property.Domain != "" {
 			log.Println("IPV4 Address: ", ipv4)
 			ipv4Property.Value = ipv4
 			ipv4Property.ModifyRecord()
@@ -196,7 +196,7 @@ func task() {
 func main() {
 	// 定时
 	c := cron.New()
-	_, err := c.AddFunc(os.Getenv("CronExpression"), func() {
+	_, err := c.AddFunc(CronExpression, func() {
 		task()
 	})
 
